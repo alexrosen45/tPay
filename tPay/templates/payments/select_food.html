@@ -35,8 +35,8 @@
 
     {% block nav %}{% include 'navbar.html' %}{% endblock nav %}
 
-    <div class="no-background">
-        <div class="center-container">
+    <div class="center-container">
+        <div class="no-background">
             <form id="payment-form" method="POST" action="{% url 'authenticate_face' %}">
                 {% csrf_token %}
                 <div class="center-container">
@@ -48,26 +48,19 @@
 
                 <div class="row g-1">
                     <div class="col-md-12">
-                        <label for="province" class="form-label">Province / Territory</label>
-                        <select class="form-select" id="province" name="province" required>
+                        <label for="food_item" class="form-label">Select Food Item</label>
+                        <select class="form-select" id="food_item" name="food_item" required>
                             <option selected disabled value="">Choose...</option>
-                            <option value="Alberta">Alberta</option>
-                            <option value="British Columbia">British Columbia</option>
-                            <option value="Manitoba">Manitoba</option>
-                            <option value="New Brunswick">New Brunswick</option>
-                            <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-                            <option value="Northwest Territories">Northwest Territories</option>
-                            <option value="Nova Scotia">Nova Scotia</option>
-                            <option value="Nunavut">Nunavut</option>
-                            <option value="Ontario">Ontario</option>
-                            <option value="Prince Edward Island">Prince Edward Island</option>
-                            <option value="Quebec">Quebec</option>
-                            <option value="Saskatchewan">Saskatchewan</option>
-                            <option value="Yukon">Yukon</option>
+                            <option value="Pizza">Pizza</option>
+                            <option value="Pasta">Pasta</option>
                         </select>
                     </div>
                 </div>
                 <hr>
+                <div class="center-container">
+                    <button onclick="history.back()" class="button-back">Back</button>
+                    <button id="submit" class="button-submit">Next</button>
+                </div>
             </form>
         </div>
     </div>
