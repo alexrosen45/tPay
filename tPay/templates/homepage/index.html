@@ -5,11 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCON | Home</title>
-    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    <title>tPay</title>
     <!--CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
     <!--JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -18,7 +16,24 @@
 </head>
 
 <body>
-    <p>{{ name }}</p>
+
+    <a href="https://www.utoronto.ca/" class="logo" target="_blank">
+        <img src="{% static 'images/uoft_2.png' %}" alt="">
+    </a>
+
+    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+    <label for="menu-icon"></label>
+    <nav class="nav">
+        <ul class="pt-5">
+            <li><a href="#">Sign In</a></li>
+            <li><a href="#">Accept Payment</a></li>
+            <li><a href="#">Register User</a></li>
+        </ul>
+    </nav>
+
+    <div class="section-center">
+        <h1 class="mb-0">tPay</h1>
+    </div>
 </body>
 
 </html>
