@@ -6,10 +6,17 @@ from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from django.core.files.base import ContentFile
 from django.core.files.temp import NamedTemporaryFile
+from django.views.decorators.http import require_POST
 
 
 @login_required(login_url="/signin")
 def accept_payment(request):
+    return render(request, "payments/select_food.html")
+
+
+@login_required(login_url="/signin")
+@require_POST
+def authenticate_face(request):
     context = {'signed_in': request.user.is_authenticated}
     if request.method == 'POST':
         username = request.POST["username"]
