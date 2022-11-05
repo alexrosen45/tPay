@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from registration.models import Person
 
 from .forms import PersonForm
 
@@ -13,10 +14,15 @@ def registration(request):
         form = PersonForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
+            # save valid form data to database
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            student_number = form.cleaned_data['student_number']
+            person = Person(first_name=first_name, last_name=last_name, student_number=student_number)
+            person.save()
+
             # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+            return render(request, "registration/registration_complete.html", {'form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:

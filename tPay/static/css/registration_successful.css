@@ -1,0 +1,65 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #f2f2f2;
+    background-color: #1f2029;
+    overflow: hidden;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 4%;
+    height: 100vh;
+    width: 100%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.card-container {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.h1-card {
+    color: #88B04B;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.p-card {
+    color: #f2f2f2;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    margin: 0;
+}
+
+i {
+    color: #9ABC66;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left: -15px;
+}
+
+.card-card {
+    background: #333333;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px black;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.info-card {
+    background: #1f2029;
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px 2px black;
+    display: inline-block;
+    margin: 0 auto;
+}
