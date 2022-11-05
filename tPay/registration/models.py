@@ -1,3 +1,7 @@
-from django.db import models
+from django.db import models  
 
-# Create your models here.
+class Person(models.Model):
+    first_name = models.CharField(max_length=50, default=None)
+    last_name = models.CharField(max_length=50, default=None)
+    student_number = models.CharField(max_length=50, default=None)
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
