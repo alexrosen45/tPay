@@ -17,6 +17,10 @@
 
 <body>
 
+    <a href="https://www.utoronto.ca/" class="logo" target="_blank">
+        <img src="{% static 'images/uoft_2.png' %}" alt="">
+    </a>
+
     <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
     <label for="menu-icon"></label>
     <nav class="nav">
@@ -27,12 +31,33 @@
             <li><a href="{% url 'registration' %}">Register User</a></li>
         </ul>
     </nav>
+    <br>
+    <br>
 
-    <form action="{% url 'registration' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
+    <div class="center">
+        <div class="container">
+            <h1>Registration</h1>
+            <br>
+            <br>
+            <div class="center">
+                <form action="{% url 'registration' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.last_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.student_number }}
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

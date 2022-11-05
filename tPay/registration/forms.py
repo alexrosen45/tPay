@@ -1,6 +1,26 @@
 from django import forms
+from django.forms import ModelForm, TextInput, EmailInput
 
-class PersonForm(forms.Form):
-    first_name = forms.CharField(max_length=50)
-    last_name = forms.CharField(max_length=50)
-    student_number = forms.CharField(max_length=50)
+from .models import Person
+
+class PersonForm(ModelForm):
+    class Meta:
+        model = Person
+        fields = ['first_name', 'last_name', 'student_number']
+        widgets = {
+            'first_name': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'First Name'
+                }),
+            'last_name': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Last Name'
+                }),
+            'student_number': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Student Number'
+                }),
+        }

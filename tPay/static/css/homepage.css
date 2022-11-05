@@ -340,3 +340,9 @@ h1 {
         font-size: 8vh;
     }
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
