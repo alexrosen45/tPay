@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tPay | accept payment</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+    <!--JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/333122abda.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <a href="https://www.utoronto.ca/" class="logo" target="_blank">
+        <img src="{% static 'images/uoft_2.png' %}" alt="">
+    </a>
+
+    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+    <label for="menu-icon"></label>
+    <nav class="nav">
+        <ul class="pt-5">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Sign In</a></li>
+            <li><a href="{% url 'accept_payment' %}">Accept Payment</a></li>
+            <li><a href="{% url 'registration' %}">Register User</a></li>
+        </ul>
+    </nav>
+
+    <div class="contentarea">
+        <div class="Input">
+            <form method="POST" name="inputForm" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="center">
+                    <div id="camera" class="camera">
+                        <video id="video">Video stream not available.</video>
+                        <button id="startbutton" type="button">Take photo</button>
+                        <input id="webimg" value="" name="src" type="text" style="display: none;">
+                        <canvas id="canvas">
+                        </canvas>
+                    </div>
+                    <br>
+                </div>
+                <div class="center">
+                    <button type="submit" class="button" id="submit">Submit</button>
+                    <br>
+                </div>
+                <div>
+                    <img id="photo" alt="your image">
+                </div>
+            </form>
+        </div>
+        <img src="{{ path }}" alt="The screen capture will appear in this box.">
+    </div>
+</body>
+<script>
+    (function () {
+        // The width and height of the captured photo. We will set the
+        // width to the value defined here, but the height will be
+        // calculated based on the aspect ratio of the input stream.
+
+        var width = 320;    // We will scale the photo width to this
+        var height = 0;     // This will be computed based on the input stream
+
+        // |streaming| indicates whether or not we're currently streaming
+        // video from the camera. Obviously, we start at false.
+
+        var streaming = false;
+
+        // The various HTML elements we need to configure or control. These
+        // will be set by the startup() function.
+
+        var video = null;
+        var canvas = null;
+        var photo = null;
+        var startbutton = null;
+
+        function startup() {
+            video = document.getElementById('video');
+            canvas = document.getElementById('canvas');
+            photo = document.getElementById('photo');
+            startbutton = document.getElementById('startbutton');
+
+            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function (err) {
+                    console.log("An error occurred: " + err);
+                });
+
+            video.addEventListener('canplay', function (ev) {
+                if (!streaming) {
+                    height = video.videoHeight / (video.videoWidth / width);
+
+                    // Firefox currently has a bug where the height can't be read from
+                    // the video, so we will make assumptions if this happens.
+
+                    if (isNaN(height)) {
+                        height = width / (4 / 3);
+                    }
+
+                    video.setAttribute('width', width);
+                    video.setAttribute('height', height);
+                    canvas.setAttribute('width', width);
+                    canvas.setAttribute('height', height);
+                    streaming = true;
+                }
+            }, false);
+
+            startbutton.addEventListener('click', function (ev) {
+                takepicture();
+                ev.preventDefault();
+            }, false);
+
+            clearphoto();
+        }
+
+        // Fill the photo with an indication that none has been
+        // captured.
+
+        function clearphoto() {
+            var context = canvas.getContext('2d');
+            context.fillStyle = "#AAA";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            var data = canvas.toDataURL('image/png');
+            photo.setAttribute('src', data);
+        }
+
+        // Capture a photo by fetching the current contents of the video
+        // and drawing it into a canvas, then converting that to a PNG
+        // format data URL. By drawing it on an offscreen canvas and then
+        // drawing that to the screen, we can change its size and/or apply
+        // other changes before drawing it.
+
+        function takepicture() {
+            var context = canvas.getContext('2d');
+            if (width && height) {
+                canvas.width = width;
+                canvas.height = height;
+                context.drawImage(video, 0, 0, width, height);
+
+                var data = canvas.toDataURL('image/png');
+                photo.setAttribute('src', data);
+            } else {
+                clearphoto();
+            }
+        }
+
+        // Set up our event listener to run the startup process
+        // once loading is complete.
+        window.addEventListener('load', startup, false);
+    })();
+</script>
+
+</html>
