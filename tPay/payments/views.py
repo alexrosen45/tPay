@@ -2,19 +2,15 @@ from os import path
 from urllib.request import urlopen
 from django.shortcuts import redirect, render
 from .models import Image
-
-def accept_payment(request):
-    return render(request, "payments/payments.html")
-
-
-# Import these methods
+from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from django.core.files.base import ContentFile
 from django.core.files.temp import NamedTemporaryFile
 
 
+@login_required(login_url="/signin")
 def accept_payment(request):
-    context = dict()
+    context = {'signed_in': request.user.is_authenticated}
     if request.method == 'POST':
         username = request.POST["username"]
         image_path = request.POST["src"]

@@ -21,16 +21,7 @@
         <img src="{% static 'images/uoft_2.png' %}" alt="">
     </a>
 
-    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
-    <label for="menu-icon"></label>
-    <nav class="nav">
-        <ul class="pt-5">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="#">Sign In</a></li>
-            <li><a href="{% url 'accept_payment' %}">Accept Payment</a></li>
-            <li><a href="{% url 'registration' %}">Register User</a></li>
-        </ul>
-    </nav>
+    {% block nav %}{% include 'navbar.html' %}{% endblock nav %}
     <br>
     <br>
 

@@ -10,6 +10,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/authentication.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
     <!--JavaScript-->
     <script src="https://kit.fontawesome.com/333122abda.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -24,6 +25,12 @@
 </head>
 
 <body>
+
+    <a href="https://www.utoronto.ca/" class="logo" target="_blank">
+        <img src="{% static 'images/uoft_2.png' %}" alt="">
+    </a>
+
+    {% block nav %}{% include 'navbar.html' %}{% endblock nav %}
 
     <div class="box">
         <div class="price-box__wrap" style="border-radius: 10px;">

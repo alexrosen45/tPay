@@ -25,6 +25,12 @@
 
 <body>
 
+    <a href="https://www.utoronto.ca/" class="logo" target="_blank">
+        <img src="{% static 'images/uoft_2.png' %}" alt="">
+    </a>
+
+    {% block nav %}{% include 'navbar.html' %}{% endblock nav %}
+
     <div class="sect sect--padding-bottom">
         <div class="container">
             <div class="card-container">
