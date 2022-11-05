@@ -6,12 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BCON | Sign In</title>
-    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    <title>tPay | Sign In</title>
     <!--CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/login_page.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/authentication.css' %}" />
     <!--JavaScript-->
     <script src="https://kit.fontawesome.com/333122abda.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -26,7 +24,6 @@
 </head>
 
 <body>
-    {% block nav %}{% include 'authentication/navbar.html' %}{% endblock nav %}
 
     <div class="box">
         <div class="price-box__wrap" style="border-radius: 10px;">
@@ -37,9 +34,6 @@
                 <input class="box-input" type="text" name="username" placeholder="Username" required>
                 <input class="box-input" type="password" name="password" placeholder="Password" required>
                 <hr>
-                <div class="auth-links-container">
-                    <p class="auth-fp-link"><a href="{% url 'forgot_password_email' %}"><u>forgot password</u></a></p>
-                </div>
                 <input class="box-input" type="submit" name="" value="Sign In"
                     style="margin-top: 0%; margin-bottom: 3%;">
                 {% if is_error %}

@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def signin(request):
@@ -23,3 +24,10 @@ def signin(request):
             })
 
     return render(request, "authentication/signin.html")
+
+
+# check login before authorizing signout
+@login_required(login_url="/signin")
+def signout(request):
+    logout(request)
+    return redirect('home')

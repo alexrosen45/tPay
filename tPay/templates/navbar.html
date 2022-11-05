@@ -1,0 +1,17 @@
+<!--Navbar-->
+{% load static %}
+<input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+<label for="menu-icon"></label>
+<nav class="nav">
+    <ul class="pt-5">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'accept_payment' %}">Accept Payment</a></li>
+        <li><a href="{% url 'registration' %}">Register User</a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+        <li><a href="{% url 'signin' %}">Sign In</a></li>
+        {% if signed_in %}
+        <li><a href="{% url 'signout' %}">Sign Out</a></li>
+        {% endif %}
+    </ul>
+</nav>
