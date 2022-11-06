@@ -46,7 +46,8 @@ from .models import Item, PaymentRecord
 @login_required(login_url="/signin")
 def accept_payment(request):
     food_items = [food_item.item for food_item in Item.objects.all()]
-    return render(request, "payments/select_food.html", context={'food_items': food_items})
+    context = {'signed_in': request.user.is_authenticated, 'food_items': food_items}
+    return render(request, "payments/select_food.html", context=context)
 
 
 @login_required(login_url="/signin")
