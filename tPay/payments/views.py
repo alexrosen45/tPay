@@ -19,7 +19,6 @@ print(keras.__version__)
 from tensorflow.keras.utils import load_img
 from tensorflow.keras.utils import img_to_array
 from keras.applications.imagenet_utils import decode_predictions
-import matplotlib.pyplot as plt
 import numpy as np
 # from keras.applications import vgg16
 import datetime
