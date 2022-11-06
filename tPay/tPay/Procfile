@@ -1,1 +1,1 @@
-web: gunicorn tPay.wsgi
+web: gunicorn tPay.wsgi --log-file -
