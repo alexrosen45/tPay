@@ -55,7 +55,7 @@ def authenticate_face(request):
         try:
             request.POST["food_item"]
         except:
-            vgg16 = keras.models.load_model("classify/keras_model.h5")
+            vgg16 = keras.models.load_model("classify/model.savedmodel")
 
             # f=request.FILES['sentFile'] # here you get the files needed
             response = {}
@@ -101,7 +101,8 @@ def authenticate_face(request):
             # label = list(label)[0]
             
             # accept accuracy greater than of equal to 95%
-            if confidence_score > 0.95:
+            print(str(confidence_score))
+            if confidence_score > 0.99:
                 response['name'] = str(predictions)
                 return render(request, "payments/verify.html", response)
             else:
