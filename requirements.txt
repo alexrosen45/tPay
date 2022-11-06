@@ -45,9 +45,10 @@ sqlparse==0.4.3
 tensorboard==2.10.1
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
-tensorflow==2.10.0
+tensorflow-cpu==2.10.0
 tensorflow-estimator==2.10.0
 tensorflow-io-gcs-filesystem==0.27.0
+tensorflow_intel==2.10.0
 termcolor==2.1.0
 typing_extensions==4.4.0
 tzdata==2022.6
