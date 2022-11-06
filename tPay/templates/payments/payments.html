@@ -31,9 +31,10 @@
     <div class="center-container">
         <div class="no-background">
             <div class="center-container">
-                <video id="video" width="320" height="240" autoplay></video>
-                <canvas id="canvas" width="320" height="240"></canvas>
+                <video id="video" width="300" height="210" autoplay></video>
+                <canvas id="canvas" width="300" height="210"></canvas>
             </div>
+            <br>
             <div class="center-container">
                 <button class="start-camera" id="start-camera">Open Camera</button>
                 <button class="click-photo" id="click-photo">Take Photo</button>
@@ -41,15 +42,20 @@
         </div>
     </div>
     <div class="center-container">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="center-container">
-                <input type="submit" name="submit" value="Upload" />
-            </div>
-            <div class="center-container">
-                <input class="img-url" id="img_url" type="text" name="img_url" />
-            </div>
-        </form>
+        <div class="no-background">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input id="food_item" type="hidden" name="food_item" value="{{food_item}}" />
+                <div class="center-container" colour="black">
+                    <input class="upload" type="submit" name="submit" value="Upload" />
+                </div>
+                <div class="center-container">
+                    <div class="no-display">
+                        <input class="img-url" id="img_url" type="text" name="img_url" />
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 <script>
