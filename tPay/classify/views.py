@@ -39,7 +39,7 @@ def verify(request):
         vgg16 = keras.models.load_model("classify/keras_model.h5")
 
         # f=request.FILES['sentFile'] # here you get the files needed
-        # response = {}
+        response = {}
         # file_name = "pic.jpg"
         # file_name_2 = default_storage.save(file_name, f)
         file_url = request.POST["img_url"]
