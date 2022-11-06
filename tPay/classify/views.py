@@ -78,7 +78,7 @@ def verify(request):
         # label = list(label)[0]
         
         # accept accuracy greater than of equal to 95%
-        if confidence_score > 0.95:
+        if confidence_score > 0.65:
             response['name'] = str(predictions)
             return render(request, "payments/verify.html", response)
         else:
