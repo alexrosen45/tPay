@@ -1,1 +1,2 @@
 web: gunicorn tPay.wsgi --log-file -
+worker: python ../manage.py
