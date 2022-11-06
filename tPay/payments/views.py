@@ -19,7 +19,6 @@ print(keras.__version__)
 from tensorflow.keras.utils import load_img
 from tensorflow.keras.utils import img_to_array
 from keras.applications.imagenet_utils import decode_predictions
-import matplotlib.pyplot as plt
 import numpy as np
 # from keras.applications import vgg16
 import datetime
@@ -40,28 +39,31 @@ from django.views.decorators.http import require_POST
 from io import BytesIO
 import base64
 from registration.models import Person
+from .models import Item, PaymentRecord
 
 
 @login_required(login_url="/signin")
 def accept_payment(request):
-    return render(request, "payments/select_food.html")
+    food_items = [food_item.item for food_item in Item.objects.all()]
+    context = {'signed_in': request.user.is_authenticated, 'food_items': food_items}
+    return render(request, "payments/select_food.html", context=context)
 
 
 @login_required(login_url="/signin")
 @require_POST
 def authenticate_face(request):
-    context = {'signed_in': request.user.is_authenticated, 'food_item': 'pasta'} # request.POST["food_item"]
+    context = {'signed_in': request.user.is_authenticated, 'food_item': request.POST["food_item"]}
     if request.method == 'POST':
         try:
-            request.POST["food_item"]
-        except:
+            file_url = request.POST["img_url"]
+
+            # get model
             vgg16 = keras.models.load_model("classify/model.savedmodel")
 
             # f=request.FILES['sentFile'] # here you get the files needed
             response = {}
             # file_name = "pic.jpg"
             # file_name_2 = default_storage.save(file_name, f)
-            file_url = request.POST["img_url"]
             file_url = file_url.split("base64,")[1]
             print(file_url)
             # file_url = file_url[1:]
@@ -110,11 +112,22 @@ def authenticate_face(request):
             
             # accept accuracy greater than of equal to 95%
             print(str(confidence_score))
-            if confidence_score > 0.99:
+            print(str(predictions))
+            if confidence_score > 0.85 and predictions not in ["invalid", "blank"]:
                 response['name'] = str(predictions)
+                print(context['food_item'])
+
+                student = Person.objects.get(first_name=response['name'])
+                item = Item.objects.get(item=context['food_item'])
+                purchase = PaymentRecord(student_number=student.student_number, item=item.item, price_in_cents_cad=item.price_in_cents_cad)
+                purchase.save() # save purchase
+
                 return render(request, "payments/verify.html", response)
             else:
-                return redirect("home")
+                food_items = [food_item.item for food_item in Item.objects.all()]
+                return render(request, "payments/select_food.html", context={'error' : True, 'food_items': food_items})
+        except:
+            pass
         return render(request, "payments/payments.html", context=context)
         
     return render(request, "payments/payments.html", context=context)

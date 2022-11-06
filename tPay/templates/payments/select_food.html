@@ -48,11 +48,12 @@
 
                 <div class="row g-1">
                     <div class="col-md-12">
-                        <label for="food_item" class="form-label">Select Food Item</label>
+                        <label for="food_item" class="form-label">Select Item</label>
                         <select class="form-select" id="food_item" name="food_item" required>
                             <option selected disabled value="">Choose...</option>
-                            <option value="Pizza">Pizza</option>
-                            <option value="Pasta">Pasta</option>
+                            {% for item in food_items %}
+                            <option value="{{item}}">{{item}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -61,6 +62,12 @@
                     <button onclick="history.back()" class="button-back">Back</button>
                     <button id="submit" class="button-submit">Next</button>
                 </div>
+                {% if error %}
+                <br>
+                <div class="center-container">
+                    <p><b>Error: </b>invalid face scan</p>
+                </div>
+                {% endif %}
             </form>
         </div>
     </div>

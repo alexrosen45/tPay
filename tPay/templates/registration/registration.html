@@ -9,6 +9,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}" />
     <!--JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/333122abda.js" crossorigin="anonymous"></script>
@@ -25,29 +26,43 @@
     <br>
     <br>
 
-    <div class="center">
-        <div class="container">
-            <h1>Registration</h1>
-            <br>
-            <br>
-            <div class="center">
-                <form action="{% url 'registration' %}" method="post">
-                    {% csrf_token %}
+    <div class="center-container">
+        <form method="post" action="{% url 'registration' %}">
+            {% csrf_token %}
+            <div class="no-background">
+                <div class="center-container">
+                    <h4><b>tPay | Registration</b></h4>
+                </div>
+                <hr>
+                <br>
+                <div class="center-container">
                     <div class="form-group">
                         {{ form.first_name }}
                     </div>
+                </div>
+                <div class="center-container">
                     <div class="form-group">
                         {{ form.last_name }}
                     </div>
+                </div>
+                <div class="center-container">
                     <div class="form-group">
                         {{ form.student_number }}
                     </div>
-                    <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="Submit">
-                    </div>
-                </form>
+                </div>
+                <br>
+                <div class="center-container">
+                    <input class="button-submit" type="submit" name="submit" value="Register">
+                </div>
+                <hr>
+                <div class="center-container">
+                    <h3><small>
+                            Don't have student id? Ask your registrar for assistance!
+                        </small>
+                    </h3>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 

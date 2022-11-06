@@ -26,3 +26,7 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('', include('classify.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = "tPay Admin"
+admin.site.site_title = "tPay Admin Portal"
+admin.site.index_title = "Welcome to the tPay Admin Portal"

@@ -8,24 +8,58 @@
     <title>tPay</title>
     <!--CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/force_home.css' %}" />
     <!--JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/333122abda.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-
-    <a href="https://www.utoronto.ca/" class="logo" target="_blank">
-        <img src="{% static 'images/uoft_2.png' %}" alt="">
-    </a>
+<body background-image="{% static 'images/background.jpg' %} !important">
 
     {% block nav %}{% include 'navbar.html' %}{% endblock nav %}
 
     <div class="section-center">
-        <h1 class="mb-0">tPay</h1>
+        <h1 class="mb-0"><b>tPay</b></h1>
+        <div class="center-container">
+            <h2>Pay with your face anywhere on campus</h2>
+            <h5>At tPay we believe that TCards are the past, and facial recognition is the future! Join us in
+                modernizing our campus today.</h5>
+        </div>
     </div>
+
 </body>
+
+<script>
+    document.onmousemove = animateCircles; // circle follow mouse
+
+    var colors = ['#003566', '#262626', '#000033']
+
+    function animateCircles(event) {
+        var circle = document.createElement("div");
+        circle.setAttribute("class", "circle");
+        document.body.appendChild(circle); // adds function to body
+
+        // adds motion
+        circle.style.left = event.clientX + 'px';
+        circle.style.top = event.clientY + 'px';
+
+        // randomize color
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        circle.style.borderColor = color;
+
+        // adds animation
+        circle.style.transition = "all 0.5s linear 0s";
+
+        circle.style.left = circle.offsetLeft - 20 + 'px';
+        circle.style.top = circle.offsetTop - 20 + 'px';
+
+        circle.style.width = "50px";
+        circle.style.height = "50px";
+        circle.style.borderWidth = "5px";
+        circle.style.opacity = 0;
+    }
+</script>
 
 </html>

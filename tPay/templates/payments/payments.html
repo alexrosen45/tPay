@@ -29,24 +29,28 @@
     <br>
 
     <div class="center-container">
-        <div class="no-background">
-            <div class="center-container">
-                <video id="video" width="320" height="240" autoplay></video>
-                <canvas id="canvas" width="320" height="240"></canvas>
-            </div>
-            <div class="center-container">
-                <button class="start-camera" id="start-camera">Open Camera</button>
-                <button class="click-photo" id="click-photo">Take Photo</button>
-            </div>
-        </div>
-    </div>
-    <div class="center-container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="center-container">
-                <input type="submit" name="submit" value="Upload" />
+            <div class="no-background">
+                <div class="center-container">
+                    <video id="video" width="auto" height="210" autoplay></video>
+                    <canvas id="canvas" width="auto" height="210"></canvas>
+                </div>
+                <br>
+                <div class="center-container">
+                    <button class="start-camera" id="start-camera">Start</button>
+                    <button class="click-photo" id="click-photo">Take Photo</button>
+                    <input class="button-submit" type="submit" name="submit" value="Upload" />
+                </div>
+                <hr>
+                <h3><small>
+                        Having trouble checking out? Please contact support or make sure you have registered
+                        <a href="https://tcard.utoronto.ca/get-your-utorid-tcard/">here</a>
+                    </small>
+                </h3>
             </div>
-            <div class="center-container">
+            <input id="food_item" type="hidden" name="food_item" value="{{food_item}}" />
+            <div class="no-display">
                 <input class="img-url" id="img_url" type="text" name="img_url" />
             </div>
         </form>
