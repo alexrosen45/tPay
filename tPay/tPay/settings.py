@@ -12,36 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
-
-import keras
-import numpy as np
-# from keras import backend as K
-import tensorflow.compat.v1 as tf
-# from tensorflow.keras.backend import set_session
-#from keras.applications import vgg16
-import os
-tf.disable_eager_execution()
-# tf.keras.backend.set_session(tf.compat.v1.Session())
-
-vgg16 = keras.models.load_model("classify/keras_model.h5")
-
-def get_session():
-    config = tf.ConfigProto()
-    config.gpu_options.allow_growth = True
-    return tf.Session(config=config)
-
-tf.keras.backend.set_session(get_session())
-
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-SESS = tf.Session(config=config)
-print("model loading")
-GRAPH1 = tf.get_default_graph()
-
-tf.keras.backend.set_session(SESS)
-# Load the VGG model
-#VGG_MODEL = vgg16.VGG16(weights="imagenet")
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

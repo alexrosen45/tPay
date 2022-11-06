@@ -13,7 +13,6 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.conf import settings 
 import tensorflow as tf
-
 from tensorflow.compat.v1.keras.backend import set_session
 import keras
 print(keras.__version__)
@@ -40,6 +39,7 @@ from django.core.files.temp import NamedTemporaryFile
 from django.views.decorators.http import require_POST
 from io import BytesIO
 import base64
+from registration.models import Person
 
 
 @login_required(login_url="/signin")
@@ -55,7 +55,7 @@ def authenticate_face(request):
         try:
             request.POST["food_item"]
         except:
-            vgg16 = keras.models.load_model("classify/keras_model.h5")
+            vgg16 = keras.models.load_model("classify/model.savedmodel")
 
             # f=request.FILES['sentFile'] # here you get the files needed
             response = {}
@@ -68,7 +68,15 @@ def authenticate_face(request):
             # original = load_img(file_url, target_size=(224, 224))
             # numpy_image = img_to_array(original)
             
-            class_names = open('classify/labels.txt', 'r').readlines()
+            # class_names = open('classify/labels.txt', 'r').readlines()
+            # class_names = [person for person in Person._meta.get_fields()]
+            people = Person.objects.all()
+            class_names = []
+            for person in people:
+                if person.label_number != -1:
+                    class_names.append(person.first_name)
+            
+
             data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
             # Replace this with the path to your image
@@ -101,7 +109,8 @@ def authenticate_face(request):
             # label = list(label)[0]
             
             # accept accuracy greater than of equal to 95%
-            if confidence_score > 0.95:
+            print(str(confidence_score))
+            if confidence_score > 0.99:
                 response['name'] = str(predictions)
                 return render(request, "payments/verify.html", response)
             else:

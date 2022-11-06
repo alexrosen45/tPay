@@ -9,6 +9,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}" />
     <!--JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/333122abda.js" crossorigin="anonymous"></script>
@@ -23,18 +24,33 @@
 
     {% block nav %}{% include 'navbar.html' %}{% endblock nav %}
 
-    <div class="contentarea">
-        <button id="start-camera">Start Camera</button>
-        <video id="video" width="320" height="240" autoplay></video>
-        <button id="click-photo">Click Photo</button>
-        <canvas id="canvas" width="320" height="240"></canvas>
-    </div>
+    <br>
+    <br>
+    <br>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input id="img_url" type="text" name="img_url" />
-        <input type="submit" name="submit" value="Upload" />
-    </form>
+    <div class="center-container">
+        <div class="no-background">
+            <div class="center-container">
+                <video id="video" width="320" height="240" autoplay></video>
+                <canvas id="canvas" width="320" height="240"></canvas>
+            </div>
+            <div class="center-container">
+                <button class="start-camera" id="start-camera">Open Camera</button>
+                <button class="click-photo" id="click-photo">Take Photo</button>
+            </div>
+        </div>
+    </div>
+    <div class="center-container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="center-container">
+                <input type="submit" name="submit" value="Upload" />
+            </div>
+            <div class="center-container">
+                <input class="img-url" id="img_url" type="text" name="img_url" />
+            </div>
+        </form>
+    </div>
 </body>
 <script>
     let camera_button = document.querySelector("#start-camera");
@@ -52,7 +68,7 @@
         let image_data_url = canvas.toDataURL('image/jpeg');
 
         // data url of the image
-        console.log(image_data_url);
+        // console.log(image_data_url);
         // document.getElementById("img_url").value = fileData;
 
         // Here is the code for converting "image source" (url) to "Base64".
