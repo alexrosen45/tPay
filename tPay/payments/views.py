@@ -110,10 +110,10 @@ def authenticate_face(request):
             # label = decode_predictions(predictions)
             # label = list(label)[0]
             
-            # accept accuracy greater than of equal to 95%
+            # accept accuracy greater than of equal to 70%
             print(str(confidence_score))
             print(str(predictions))
-            if confidence_score > 0.85 and predictions not in ["invalid", "blank"]:
+            if confidence_score > 0.97 and predictions not in ["invalid", "blank"]:
                 response['name'] = str(predictions)
                 print(context['food_item'])
 
